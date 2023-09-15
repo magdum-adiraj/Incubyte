@@ -67,6 +67,34 @@ class Chandrayan
             } 
         }
 
+        void up()
+        {
+            if(face!='U' or face!='D')
+            {
+                prev=face;
+                face='U';
+            }
+            else if(face=='D')
+            {
+                face=prev;
+            }
+            // Here Up when already face Up is invalid arguement 
+        }
+
+        void down()
+        {
+            if(face!='U' or face!='D')
+            {
+                prev=face;
+                face='D';
+            }
+            else if(face=='U')
+            {
+                face=prev;
+            }
+            //Here down when already face down is invalid arguement
+        }
+
         void printPosition()
         {
             cout<<"Current Position: ("<<x<<","<<y<<","<<z<<") Direction:"<<face<<endl;
@@ -78,13 +106,15 @@ int main()
     int x1=0,y1=0,z1=0;
     char face1='N';
     Chandrayan c(x1,y1,z1,face1);
-    char a[3]={'f','l','b'};
-    for(int i=0;i<3;i++)
+    char a[5]={'f','r','u','b','l'};
+    for(int i=0;i<5;i++)
     {
         if(a[i]=='f') c.forward();
         else if(a[i]=='b') c.backward();
         else if(a[i]=='l') c.left();
         else if(a[i]=='r') c.right();
+        else if(a[i]=='u') c.up();
+        else if(a[i]=='d') c.down();
     }
     c.printPosition();
     return 0;
