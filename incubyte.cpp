@@ -8,7 +8,7 @@ class Chandrayan
         char face,prev;
 
     public:
-        Chandrayan(int x1,int y1,int z1,char face1)
+        Chandrayan(int x1,int y1,int z1,char face1)            //Initializing with starting coordinates and direction
         {
             x=x1;
             y=y1;
@@ -17,7 +17,7 @@ class Chandrayan
             prev='-';
         }
         
-        void forward()
+        void forward()                                         //Accoringly Add coordinates and direction remains same
         {
             if(face=='N') y++;
             else if(face=='S') y--;
@@ -27,7 +27,7 @@ class Chandrayan
             else if(face=='D') z--;
         }
 
-        void backward()
+        void backward()                                        //Accoringly Add coordinates and direction remains same
         {
             if(face=='N') y--;
             else if(face=='S') y++;
@@ -37,13 +37,13 @@ class Chandrayan
             else if(face=='D') z++;
         }
 
-        void left()
+        void left()                                            //Rotated directions
         {
             if(face=='N') face='W';
             else if(face=='W') face='S';
             else if(face=='S') face='E';
             else if(face=='E') face='N';
-            else if(face=='U' or face=='D')
+            else if(face=='U' or face=='D')                 //When Up or Down the left and right depends on prev direction 
             {
                 if(prev=='N') face='W';
                 else if(prev=='W') face='S';
@@ -74,11 +74,11 @@ class Chandrayan
                 prev=face;
                 face='U';
             }
-            else if(face=='D')
+            else if(face=='D')                                  //When it is up and instructed to Down it will return to its prev direction
             {
                 face=prev;
             }
-            // Here Up when already face Up is invalid arguement 
+            // Here Up when already face=Up is invalid arguement 
         }
 
         void down()
@@ -92,22 +92,38 @@ class Chandrayan
             {
                 face=prev;
             }
-            //Here down when already face down is invalid arguement
+            //Here down when already face=down is invalid arguement
         }
 
         void printPosition()
         {
-            cout<<"Current Position: ("<<x<<","<<y<<","<<z<<") Direction:"<<face<<endl;
+            cout<<"Final Position: ("<<x<<","<<y<<","<<z<<") Direction:"<<face<<endl;
         }
 };
 
 int main()
 {
-    int x1=0,y1=0,z1=0;
-    char face1='N';
+    int x1,y1,z1;
+    char face1;
+    cout<<"Enter initial X co-ordinate:";
+    cin>>x1;
+    cout<<"Enter initial Y co-ordinate:";
+    cin>>y1;
+    cout<<"Enter initial Z co-ordinate:";
+    cin>>z1;
+    cout<<"Enter initial direction:";
+    cin>>face1;
     Chandrayan c(x1,y1,z1,face1);
-    char a[5]={'f','r','u','b','l'};
-    for(int i=0;i<5;i++)
+    vector<char> a;
+    char b;
+    while(true)
+    {
+        cout<<"Enter instruction(f=forward, b=backward, l=left, r=right, u=up, d=down, e=exit):";
+        cin>>b;
+        if(b=='e') break;
+        else a.push_back(b);
+    }
+    for(int i=0;i<a.size();i++)
     {
         if(a[i]=='f') c.forward();
         else if(a[i]=='b') c.backward();
